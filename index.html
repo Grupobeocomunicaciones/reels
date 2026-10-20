@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reels Octubre-Noviembre</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@400;600;700&display=swap">
+<style>
+/* Galería pensada para celular: secciones por marca, portadas 9:16 en grilla; al tocar, el video ocupa toda la pantalla */
+:root{
+  --bg:#121014; --panel:#1c191f; --line:#2e2a31; --fg:#f1ece7; --mute:#a39a94;
+  --c-circulo:#c9a46a; --c-altos:#b9c6d8; --c-mf:#f08fb0; --c-beo:#8fa7e0;
+  --display:"Cormorant Garamond", Georgia, serif; --body:Manrope, system-ui, sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);-webkit-text-size-adjust:100%}
+.wrap{max-width:1100px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left))}
+header h1{font-family:var(--display);font-weight:600;font-size:clamp(30px,8vw,44px);margin:6px 0 4px;line-height:1.05}
+header p{color:var(--mute);margin:0 0 16px;font-size:14px;line-height:1.45}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:0 0 auto;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-weight:600;font-size:14px;white-space:nowrap}
+nav a span{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:1px}
+section{padding-top:22px;scroll-margin-top:64px}
+section h2{display:flex;align-items:baseline;gap:10px;font-family:var(--display);font-size:28px;font-weight:600;margin:0 0 12px}
+section h2 small{font-family:var(--body);font-size:13px;color:var(--mute);font-weight:400}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.card{display:flex;flex-direction:column;justify-content:flex-start;align-self:start;width:100%;padding:0;border:0;background:var(--panel);border-radius:14px;overflow:hidden;cursor:pointer;text-align:left;color:var(--fg);font:inherit}
+.thumb{position:relative;aspect-ratio:9/16;background:#000}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .num{position:absolute;top:8px;left:8px;font-size:12px;font-weight:700;padding:3px 7px;border-radius:7px;color:#111}
+.thumb .dur{position:absolute;bottom:8px;right:8px;font-size:12px;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:7px}
+.thumb .play{position:absolute;inset:0;display:grid;place-items:center}
+.thumb .play i{width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.8);display:grid;place-items:center}
+.thumb .play i:after{content:"";border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.card b{display:block;padding:9px 10px 11px;font-size:14px;line-height:1.25;font-weight:600}
+.card:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.player{position:fixed;inset:0;z-index:20;background:#000;display:flex;flex-direction:column}
+.player[hidden]{display:none}
+.top{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 10px) max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))}
+.top .t{flex:1;min-width:0}
+.top .t b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .t span{font-size:12px;color:var(--mute)}
+.x{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:1px solid #444;background:#111;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.stage{flex:1;min-height:0;display:flex;justify-content:center;align-items:center}
+video{max-width:100%;max-height:100%;height:100%;aspect-ratio:9/16;background:#000}
+.bar{display:flex;gap:8px;padding:10px max(14px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 12px) max(14px,env(safe-area-inset-left))}
+.bar button,.bar a{flex:1;min-height:46px;border-radius:12px;border:1px solid #3a3a3a;background:#161616;color:#fff;font:600 14px var(--body);text-decoration:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.bar a{background:var(--fg);color:#111;border-color:var(--fg);flex:1.4}
+/* Reels: cada tarjeta lleva el copy para publicar */
+.toplinks{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.toplinks a{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border-radius:999px;background:var(--fg);color:#111;font-weight:700;font-size:14px;text-decoration:none}
+.toplinks a.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.list{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:760px){.list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.row{display:grid;grid-template-columns:132px minmax(0,1fr);gap:12px;background:var(--panel);border-radius:14px;padding:10px}
+.row .card{background:transparent}
+.row .thumb{border-radius:10px;overflow:hidden}
+.copy h3{margin:2px 0 6px;font-size:15px;line-height:1.25}
+.copy pre{white-space:pre-wrap;margin:0 0 8px;font:13px/1.45 var(--body);color:#ddd6cf;max-height:220px;overflow:auto}
+.copy .tags{color:var(--c-circulo);font-size:13px;font-weight:600;margin:0 0 8px}
+.copy button{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#26222a;color:var(--fg);font:600 13px var(--body);cursor:pointer;margin:0 6px 6px 0}
+.copy button.ok{background:#2f6b45;border-color:#2f6b45}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Reels Octubre-Noviembre</h1>
+    <p>41 reels listos para publicar. Tocá la portada para verlo; al lado tenés el copy con el llamado a la acción y los 5 hashtags para copiar.</p>
+    <div class="toplinks"><a href="#circulo">Ver los 41 reels</a><a class="alt" href="https://grupobeocomunicaciones.github.io/historias/">Ver las stories</a></div>
+  </header>
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+<div class="player" id="player" hidden>
+  <div class="top"><div class="t"><b id="pt"></b><span id="pb"></span></div><button class="x" id="close" aria-label="Cerrar">×</button></div>
+  <div class="stage"><video id="v" controls playsinline preload="metadata"></video></div>
+  <div class="bar"><button id="prev" aria-label="Anterior">◀</button><a id="dl" href="#">Descargar en calidad completa</a><button id="next" aria-label="Siguiente">▶</button></div>
+</div>
+<script>
+const BR=[['circulo','Círculo Olivos','--c-circulo'],['altos','Altos de Olivos','--c-altos'],['mf','Modo Festejos','--c-mf'],['beo','Grupo BEO','--c-beo']];
+const REL='https://github.com/Grupobeocomunicaciones/reels/releases/download/descargas/';
+const $=id=>document.getElementById(id), v=$('v'); let L=[],cur=-1;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function build(d){
+  const nav=[],main=[];
+  BR.forEach(([k,name,c])=>{
+    const items=d.filter(h=>h.b===k); if(!items.length) return;
+    nav.push(`<a href="#${k}"><span style="background:var(${c})"></span>${name}</a>`);
+    main.push(`<section id="${k}"><h2>${name} <small>${items.length} reels</small></h2><div class="list">`+
+      items.map(h=>{const i=L.push(h)-1;return `<div class="row"><button class="card" data-i="${i}"><div class="thumb"><img loading="lazy" src="p/${h.id}.jpg" alt="${esc(h.t)}"><span class="num" style="background:var(${c})">${h.id}</span><span class="dur">${Math.round(h.d)} s</span><span class="play"><i></i></span></div></button>
+      <div class="copy"><h3>${esc(h.t)}</h3><pre>${esc(h.c)}</pre><p class="tags">${esc(h.h)}</p><button data-cp="${i}">Copiar copy + hashtags</button><button data-ht="${i}">Copiar hashtags</button></div></div>`}).join('')+`</div></section>`);
+  });
+  $('nav').innerHTML=nav.join(''); $('main').innerHTML=main.join('');
+  document.querySelectorAll('.card').forEach(b=>b.onclick=()=>open_(+b.dataset.i));
+  const cp=(b,t)=>{navigator.clipboard.writeText(t).then(()=>{const o=b.textContent;b.textContent='Copiado';b.classList.add('ok');setTimeout(()=>{b.textContent=o;b.classList.remove('ok')},1400)})};
+  document.querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>{const h=L[+b.dataset.cp];cp(b,h.c+'\n\n'+h.h)});
+  document.querySelectorAll('[data-ht]').forEach(b=>b.onclick=()=>cp(b,L[+b.dataset.ht].h));
+}
+function open_(i){cur=(i+L.length)%L.length;const h=L[cur];$('pt').textContent=h.t;$('pb').textContent=BR.find(x=>x[0]===h.b)[1]+' · '+h.id;v.src='v/'+h.id+'.mp4';$('dl').href=REL+h.dl;
+  if($('player').hidden){$('player').hidden=false;document.body.style.overflow='hidden';history.pushState({p:1},'')} v.play().catch(()=>{})}
+function close_(fromPop){v.pause();v.removeAttribute('src');v.load();$('player').hidden=true;document.body.style.overflow='';if(!fromPop&&history.state&&history.state.p)history.back()}
+$('close').onclick=()=>close_(false);$('prev').onclick=()=>open_(cur-1);$('next').onclick=()=>open_(cur+1);v.onended=()=>open_(cur+1);
+addEventListener('popstate',()=>{if(!$('player').hidden)close_(true)});
+document.addEventListener('keydown',e=>{if($('player').hidden)return;if(e.key==='Escape')close_(false);if(e.key==='ArrowRight')open_(cur+1);if(e.key==='ArrowLeft')open_(cur-1)});
+fetch('data.json').then(r=>r.json()).then(build).catch(()=>{$('main').textContent='No se pudo cargar la lista de reels.'});
+</script>
+</body>
+</html>

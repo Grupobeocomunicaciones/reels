@@ -63,6 +63,7 @@ video{max-width:100%;max-height:100%;height:100%;aspect-ratio:9/16;background:#0
 .copy pre{white-space:pre-wrap;margin:0 0 8px;font:13px/1.45 var(--body);color:#ddd6cf;max-height:220px;overflow:auto}
 .copy .tags{color:var(--c-circulo);font-size:13px;font-weight:600;margin:0 0 8px}
 .copy button{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#26222a;color:var(--fg);font:600 13px var(--body);cursor:pointer;margin:0 6px 6px 0}
+.ad{border-top:1px solid var(--line);margin-top:8px;padding-top:8px}.ad small{color:var(--c-mf);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px}.ad p{font-size:13px;line-height:1.5;margin:4px 0 8px;color:#ddd6cf}
 .copy button.ok{background:#2f6b45;border-color:#2f6b45}
 </style>
 </head>
@@ -70,7 +71,7 @@ video{max-width:100%;max-height:100%;height:100%;aspect-ratio:9/16;background:#0
 <div class="wrap">
   <header>
     <h1>Reels Octubre-Noviembre</h1>
-    <p>41 reels listos para publicar. Tocá la portada para verlo; al lado tenés el copy con el llamado a la acción y los 5 hashtags para copiar.</p>
+    <p>41 reels listos para publicar. Tocá la portada para verlo; al lado tenés el copy para publicar (con llamado a la acción y 5 hashtags) y la versión para anuncio con título, descripción y botón.</p>
     <div class="toplinks"><a href="#circulo">Ver los 41 reels</a><a class="alt" href="https://grupobeocomunicaciones.github.io/historias/">Ver las stories</a></div>
   </header>
   <nav id="nav"></nav>
@@ -93,12 +94,13 @@ function build(d){
     nav.push(`<a href="#${k}"><span style="background:var(${c})"></span>${name}</a>`);
     main.push(`<section id="${k}"><h2>${name} <small>${items.length} reels</small></h2><div class="list">`+
       items.map(h=>{const i=L.push(h)-1;return `<div class="row"><button class="card" data-i="${i}"><div class="thumb"><img loading="lazy" src="p/${h.id}.jpg" alt="${esc(h.t)}"><span class="num" style="background:var(${c})">${h.id}</span><span class="dur">${Math.round(h.d)} s</span><span class="play"><i></i></span></div></button>
-      <div class="copy"><h3>${esc(h.t)}</h3><pre>${esc(h.c)}</pre><p class="tags">${esc(h.h)}</p><button data-cp="${i}">Copiar copy + hashtags</button><button data-ht="${i}">Copiar hashtags</button></div></div>`}).join('')+`</div></section>`);
+      <div class="copy"><h3>${esc(h.t)}</h3><pre>${esc(h.c)}</pre><p class="tags">${esc(h.h)}</p><button data-cp="${i}">Copiar copy + hashtags</button><button data-ht="${i}">Copiar hashtags</button>${h.a?`<div class="ad"><small>Anuncio</small><p><b>Título:</b> ${esc(h.a.titulo)}<br><b>Descripción:</b> ${esc(h.a.descripcion)}<br><b>Botón:</b> ${esc(h.a.boton)}</p><button data-ad="${i}">Copiar texto del anuncio</button></div>`:""}</div></div>`}).join('')+`</div></section>`);
   });
   $('nav').innerHTML=nav.join(''); $('main').innerHTML=main.join('');
   document.querySelectorAll('.card').forEach(b=>b.onclick=()=>open_(+b.dataset.i));
   const cp=(b,t)=>{navigator.clipboard.writeText(t).then(()=>{const o=b.textContent;b.textContent='Copiado';b.classList.add('ok');setTimeout(()=>{b.textContent=o;b.classList.remove('ok')},1400)})};
   document.querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>{const h=L[+b.dataset.cp];cp(b,h.c+'\n\n'+h.h)});
+  document.querySelectorAll('[data-ad]').forEach(b=>b.onclick=()=>cp(b,L[+b.dataset.ad].a.texto));
   document.querySelectorAll('[data-ht]').forEach(b=>b.onclick=()=>cp(b,L[+b.dataset.ht].h));
 }
 function open_(i){cur=(i+L.length)%L.length;const h=L[cur];$('pt').textContent=h.t;$('pb').textContent=BR.find(x=>x[0]===h.b)[1]+' · '+h.id;v.src='v/'+h.id+'.mp4';$('dl').href=REL+h.dl;
